@@ -17,10 +17,20 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->enum('account_type', ['0', '1']);
+            $table->string('password')->nullable();
+            $table->enum('gender', ['male', 'female', 'other'])->default('male');
+            $table->integer('age')->length(11);
+            $table->integer('aadhar_card_number')->nullable();
+            $table->string('identity_proof')->nullable();
+            $table->string('address')->nullable();
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
+            $table->integer('phone_number')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
         });
     }
 
