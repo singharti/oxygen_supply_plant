@@ -16,5 +16,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/city/{id?}', 'RegistrationController@getCity')->name('city');
+
+Route::get('/register', 'RegistrationController@register')->name('register');
+Route::post('/register', 'RegistrationController@createSupplier')->name('register.supplier');
+
 
 Route::get('/home', 'HomeController@index')->name('home');

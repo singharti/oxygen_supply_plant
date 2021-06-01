@@ -17,6 +17,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password',
+        'gender',
+        'age',
+        'aadhar_card_number',
+        'identity_proof',
+        'address',
+        'phone_number',
+        'account_type',
+        'state',
+        'city'
     ];
 
     /**
@@ -36,4 +45,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function supplierDetail()
+    {
+        return $this->hasOne(SupplierDetail::class,'user_id','id');
+    }
+
+    public function cylinder()
+    {
+        return $this->hasOne(Cylinder::class,'user_id','id');
+    }
 }
