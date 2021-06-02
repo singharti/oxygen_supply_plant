@@ -25,5 +25,7 @@ Route::post('/register', 'RegistrationController@createSupplier')->name('registe
 Route::get('/booking/cylinder/{id?}', 'RegistrationController@bookingCylinder')->name('booking.cylinder');
 Route::post('/consumer/booking', 'RegistrationController@createConsumerBooking')->name('consumer.booking');
 
-
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/booking/detail/view/{id?}', 'HomeController@viewBookingDetail')->name('booking.detail.view');
+Route::get('/booking/detail/edit/{id?}', 'HomeController@editBookingDetail')->name('booking.detail.edit');
+Route::post('/booking/detail/edit', 'HomeController@editConsumerDetail')->name('consumer.booking.edit');

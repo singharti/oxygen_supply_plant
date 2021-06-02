@@ -162,17 +162,17 @@ class RegistrationController extends Controller
                 'date_covid_19' => $request->date_covid_19,
                 'status' => 'pending',
             ]);
-            $total_cylinder = $this->cylinder->where('user_id',$supplier_id)->where('ltr', $request->cylinder)->select('quantity')->first();
-           
-            $total_cylinder = $this->cylinder->where('user_id',$supplier_id)->where('ltr', $request->cylinder)->update([
+            $total_cylinder = $this->cylinder->where('user_id', $supplier_id)->where('ltr', $request->cylinder)->select('quantity')->first();
+
+            $total_cylinder = $this->cylinder->where('user_id', $supplier_id)->where('ltr', $request->cylinder)->update([
                 'quantity' => $total_cylinder->quantity - 1,
             ]);
 
 
             return redirect('/')->withSuccess('message', 'IT WORKS!');
-
         } catch (Exception $e) {
             dd($e);
         }
     }
+
 }

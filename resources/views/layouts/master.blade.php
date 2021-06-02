@@ -3,6 +3,7 @@
 
   <head>
     <meta charset="utf-8">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/cover.jpeg')}}" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
@@ -15,7 +16,7 @@
     <script scr="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
     <script scr="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js">
     </script>
-    <title>Php Machine Test</title>
+    <title>Oxygen Supply Plant</title>
 
   </head>
 
