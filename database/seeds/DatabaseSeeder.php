@@ -11,10 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        
 
         $sql = file_get_contents(database_path() . '/dump/states.sql');
-    
         DB::statement($sql);
+        $this->call(ImportTableSeeder::class);
+
     }
 }

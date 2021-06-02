@@ -225,7 +225,7 @@
                 <select class="form-control form-select @error('cylinder') is-invalid @enderror" aria-label="Default select example" name="cylinder" value="{{ old('cylinder') }}">
                     <option selected value="">Select cylinder</option>
                     @foreach($supplier_details->cylinder as $cylinder)
-                    <option data-id="{{$cylinder->id}}" value="{{$cylinder->name}}">{{$cylinder->ltr}}</option>
+                    <option data-id="{{$cylinder->id}}" value="{{$cylinder->ltr}}">{{$cylinder->ltr}}</option>
                     @endforeach
 
                 </select>

@@ -97,22 +97,37 @@ class RegistrationController extends Controller
                 'business_name' => $request->businessname,
             ]);
 
-            $liters[] = [0 => ['ltr' => 5, 'item' => 5], 1 => ['ltr' => 10, 'item' => 5], 2 => ['ltr' => 15, 'item' => 5]];
-            foreach ($liters as $key => $liter) {
-                //     print($key);
-                //   print_r($liter[$key]);
-                // $this->cylinder->create([
-                //     'user_id' =>1,
-                //     'ltr' =>$liter[$key]['ltr'],
-                //     'quantity' =>$liter[$key]['item']
-                // ]);
+            $liters = array( 
+                "0" => array (
+                   "ltr" => 5,
+                   "quantity" => 5,	
+                  
+                ),
+                
+                "1" => array (
+                   "ltr" => 10,
+                   "quantity" => 5,
+                  
+                ),
+                
+                "2" => array (
+                   "ltr" => 15,
+                   "quantity" => 5,
+                  
+                )
+             );
+             
+            foreach ($liters as $liter) {
+                $this->cylinder->create([
+                    'user_id' =>$user->id,
+                    'ltr' =>$liter['ltr'],
+                    'quantity' =>$liter['quantity']
+                ]);
 
             }
-            // dd('her');
+       
 
-
-
-            return redirect()->back()->with('message', 'IT WORKS!');
+            return redirect()->back()->with('message', 'Supplier Register Successfully');
         } catch (Exception $e) {
             dd($e);
         }
@@ -169,7 +184,7 @@ class RegistrationController extends Controller
             ]);
 
 
-            return redirect('/')->withSuccess('message', 'IT WORKS!');
+            return redirect('/')->withSuccess('message', 'Booked Cylinder Successs');
         } catch (Exception $e) {
             dd($e);
         }

@@ -24,13 +24,14 @@ class SupplierRequest extends FormRequest
     public function rules()
     {
         return [
+            'businessname' => "required|max:25|regex:/^([a-zA-Z ']*)$/",
             'name' => "required|max:25|regex:/^([a-zA-Z ']*)$/",
             'email' => 'required|unique:users,email',
             'password' => 'required|min:6',
             'confirm_password' => 'required_with:password|same:password',
             'phonenumber' => 'required|max:16|min:10',
             'gender' => 'required|in:male,female,other',
-            'age' => 'required|integer|digits_between:1,100',
+            'age' => 'required|integer|digits_between:1,3',
             'address' => "required|max:255|regex:/^([a-zA-Z0-9 ']*)$/",
             'state' => 'required',
             'city' => 'required',
@@ -45,6 +46,7 @@ class SupplierRequest extends FormRequest
     public function message()
     {
         return [
+            'businessname.required' => "Business Name field is required",
             'name.required' => "Name field is required",
             'name.regex' => "Name field in wrong way",
 

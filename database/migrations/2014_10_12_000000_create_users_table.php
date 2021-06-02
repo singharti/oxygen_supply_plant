@@ -21,12 +21,12 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->enum('gender', ['male', 'female', 'other'])->default('male');
             $table->integer('age')->length(11);
-            $table->integer('aadhar_card_number')->nullable();
+            $table->bigInteger('aadhar_card_number')->length(50)->nullable();
             $table->string('identity_proof')->nullable();
             $table->string('address')->nullable();
             $table->string('state')->nullable();
             $table->string('city')->nullable();
-            $table->integer('phone_number')->nullable();
+            $table->bigInteger('phone_number')->length(50)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
