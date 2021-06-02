@@ -10,9 +10,8 @@ class State extends Model
         'name', 
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    public function city()
+    {
+        return $this->hasOne(City::class,'state_id','id');
+    }
 }

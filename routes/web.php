@@ -23,5 +23,7 @@ Route::get('/city/{id?}', 'RegistrationController@getCity')->name('city');
 Route::get('/register', 'RegistrationController@register')->name('register');
 Route::post('/register', 'RegistrationController@createSupplier')->name('register.supplier');
 Route::get('/booking/cylinder/{id?}', 'RegistrationController@bookingCylinder')->name('booking.cylinder');
+Route::post('/consumer/booking', 'RegistrationController@createConsumerBooking')->name('consumer.booking');
+
 
 Route::get('/home', 'HomeController@index')->name('home');

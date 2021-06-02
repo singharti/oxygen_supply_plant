@@ -8,10 +8,13 @@ use App\User;
 use Session;
 use Exception;
 use App\Cylinder;
+use Carbon\Carbon;
 use App\SupplierDetail;
 use Illuminate\Http\Request;
 use App\Http\Requests\SupplierRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\BookingCylinderRequest;
+
 
 class RegistrationController extends Controller
 {
@@ -67,7 +70,7 @@ class RegistrationController extends Controller
      * Create New User by Registration Form .
      *
      */
-    public function createSupplier(Request $request)
+    public function createSupplier(SupplierRequest $request)
     {
         try {
 
@@ -124,6 +127,52 @@ class RegistrationController extends Controller
         $supplier_id = base64_decode($id);
         $states = $this->state->get();
         $supplier_details = $this->user->where('id', $supplier_id)->with('supplierDetail', 'cylinder')->first();
-        return view('booking_cylider', compact('supplier_details','states'));
+        return view('booking_cylider', compact('supplier_details', 'states'));
+    }
+    /**
+     * Create Consumer form by Booking Cylinder  Form .
+     *
+     */
+    public function createConsumerBooking(BookingCylinderRequest $request)
+    {
+        try {
+            $supplier_id = $request->supplier;
+            $extension = $request->file('identity_proof')->getClientOriginalExtension();
+            $fileNameToStore = time() . '.' . $extension;
+
+            $path = $request->file('identity_proof')->storeAs('public/identity_proof', $fileNameToStore);
+            $url    = Storage::url($path);
+
+            $user = $this->user->create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' =>  bcrypt('neosoft'),
+                'gender' => $request->gender,
+                'age' => $request->age,
+                'aadhar_card_number' => $request->aadhar_card,
+                'identity_proof' => $fileNameToStore,
+                'address'  => $request->address,
+                'phone_number'  => $request->phonenumber,
+                'account_type' => '1',
+                'state' => $request->state,
+                'city' => $request->city
+            ])->bookingHistory()->create([
+                'supplier_id' =>  $supplier_id,
+                'covid_19' => $request->covid_19,
+                'date_covid_19' => $request->date_covid_19,
+                'status' => 'pending',
+            ]);
+            $total_cylinder = $this->cylinder->where('user_id',$supplier_id)->where('ltr', $request->cylinder)->select('quantity')->first();
+           
+            $total_cylinder = $this->cylinder->where('user_id',$supplier_id)->where('ltr', $request->cylinder)->update([
+                'quantity' => $total_cylinder->quantity - 1,
+            ]);
+
+
+            return redirect('/')->withSuccess('message', 'IT WORKS!');
+
+        } catch (Exception $e) {
+            dd($e);
+        }
     }
 }

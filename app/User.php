@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cylinder::class,'user_id','id');
     }
+
+    public function bookingHistory()
+    {
+        return $this->hasOne(BookingHistory::class,'consumer_id','id');
+    }
 }

@@ -3,7 +3,8 @@
 @section('content')
 <style>
     body {
-        background: url('https://static-communitytable.parade.com/wp-content/uploads/2014/03/rethink-target-heart-rate-number-ftr.jpg') fixed;
+        background:url("{{ asset('images/cover.jpeg') }}");
+        /* background: url('https://static-communitytable.parade.com/wp-content/uploads/2014/03/rethink-target-heart-rate-number-ftr.jpg') fixed; */
         background-size: cover;
     }
 
@@ -32,9 +33,10 @@
         {{ session()->get('message') }}
     </div>
     @endif
-    <form class="form-horizontal" method="post" role="form" action="" enctype="multipart/form-data">
+    <form class="form-horizontal" method="post" role="form" action="{{ route('consumer.booking') }}" enctype="multipart/form-data">
         @csrf
         <h2>Booking Cylinder</h2>
+        <input style="display: none;" value="{{@$supplier_details->id}}" name="supplier" />
         <div class="form-group">
             <label for="businessname" class="col-sm-3 control-label">Business Name*</label>
             <div class="col-sm-9">
@@ -71,49 +73,6 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="password" class="col-sm-3 control-label">Covid 19*</label>
-            <div class="col-sm-9">
-                <select class="form-control form-select state @error('state') is-invalid @enderror" aria-label="Default select example" name="state" value="{{ old('state') }}">
-                    <option selected value="">Select State</option>
-
-                    <option data-id="" value="">Positive</option>
-                    <option data-id="" value="">Negative</option>
-
-
-                </select>
-                @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="confirm_password" class="col-sm-3 control-label">Date Covid 19*</label>
-            <div class="col-sm-9">
-                <input type="text" readonly class="form-control" id="date" placeholder="Enter End Date" name="end_date">
-
-                @error('confirm_password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="phoneNumber" class="col-sm-3 control-label">Phone number </label>
-            <div class="col-sm-9">
-                <input type="phoneNumber" id="phonenumber" placeholder="Phone number" class="form-control @error('phonenumber') is-invalid @enderror" name="phonenumber" value="{{ old('ponenumber') }}">
-                @error('phonenumber')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-                <!-- <span class="help-block">Your phone number won't be disclosed anywhere </span> -->
-            </div>
-        </div>
-        <div class="form-group">
             <label class="control-label col-sm-3 ">Gender</label>
             <div class="col-sm-6">
                 <div class="row">
@@ -134,6 +93,70 @@
                     </div>
                 </div>
                 @error('gender')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Age" class="col-sm-3 control-label">Age* </label>
+            <div class="col-sm-9">
+                <input type="number" id="age" placeholder="Age" class="form-control @error('age') is-invalid @enderror" name="age" value="{{ old('age') }}">
+                @error('age')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="aadhar_card" class="col-sm-3 control-label">Aadhar Card* </label>
+            <div class="col-sm-9">
+                <input type="number" id="aadhar_card" placeholder="Aadhar Card" class="form-control @error('aadhar_card') is-invalid @enderror" name="aadhar_card" value="{{ old('aadhar_card') }}">
+                @error('aadhar_card')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="identity_proof" class="col-sm-3 control-label">Identity Proof*</label>
+            <div class="col-sm-9">
+                <!-- <input type="file" name="file" class="form-control"> -->
+                <input type="file" id="identity_proof" class="@error('identity_proof') is-invalid @enderror" name="identity_proof" value="{{ old('identity_proof') }}" accept="image/png, image/gif, image/jpeg, image/jpg" enctype="multipart/form-data">
+                @error('identity_proof')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-3 control-label">Covid 19*</label>
+            <div class="col-sm-9">
+                <select class="form-control form-select  @error('covid_19') is-invalid @enderror" aria-label="Default select example" name="covid_19" value="{{ old('covid_19') }}">
+                    <option selected value="">Select Covid 19</option>
+
+                    <option data-id="" value="positive">Positive</option>
+                    <option data-id="" value="negative">Negative</option>
+
+
+                </select>
+                @error('covid_19')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="date_covid_19" class="col-sm-3 control-label">Date Covid 19*</label>
+            <div class="col-sm-9">
+                <input type="text" readonly class="form-control" id="date_covid_19" placeholder="Date Covid 19" name="date_covid_19">
+
+                @error('date_covid_19')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -183,40 +206,40 @@
                 @enderror
             </div>
         </div>
+
         <div class="form-group">
-            <label for="Age" class="col-sm-3 control-label">Age* </label>
+            <label for="phoneNumber" class="col-sm-3 control-label">Phone number </label>
             <div class="col-sm-9">
-                <input type="number" id="age" placeholder="Age" class="form-control @error('age') is-invalid @enderror" name="age" value="{{ old('age') }}">
-                @error('age')
+                <input type="phoneNumber" id="phonenumber" placeholder="Phone number" class="form-control @error('phonenumber') is-invalid @enderror" name="phonenumber" value="{{ old('ponenumber') }}">
+                @error('phonenumber')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
+                <!-- <span class="help-block">Your phone number won't be disclosed anywhere </span> -->
             </div>
         </div>
         <div class="form-group">
-            <label for="aadhar_card" class="col-sm-3 control-label">Aadhar Card* </label>
+            <label for="State" class="col-sm-3 control-label">Cylinder Option* </label>
             <div class="col-sm-9">
-                <input type="number" id="aadhar_card" placeholder="Aadhar Card" class="form-control @error('aadhar_card') is-invalid @enderror" name="aadhar_card" value="{{ old('aadhar_card') }}">
-                @error('aadhar_card')
+                <select class="form-control form-select @error('cylinder') is-invalid @enderror" aria-label="Default select example" name="cylinder" value="{{ old('cylinder') }}">
+                    <option selected value="">Select cylinder</option>
+                    @foreach($supplier_details->cylinder as $cylinder)
+                    <option data-id="{{$cylinder->id}}" value="{{$cylinder->name}}">{{$cylinder->ltr}}</option>
+                    @endforeach
+
+                </select>
+                @error('cylinder')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
+                <!-- <input type="number" id="state" placeholder="State" class="form-control"> -->
             </div>
         </div>
-        <div class="form-group">
-            <label for="identity_proof" class="col-sm-3 control-label">Identity Proof*</label>
-            <div class="col-sm-9">
-                <!-- <input type="file" name="file" class="form-control"> -->
-                <input type="file" id="identity_proof" class="@error('identity_proof') is-invalid @enderror" name="identity_proof" value="{{ old('identity_proof') }}" accept="image/png, image/gif, image/jpeg, image/jpg" enctype="multipart/form-data">
-                @error('identity_proof')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-        </div>
+
+
+
         <!-- /.form-group -->
         <div class="form-group">
             <div class="col-sm-9 col-sm-offset-3">
